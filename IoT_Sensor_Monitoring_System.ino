@@ -1,10 +1,3 @@
-/*
- * ============================================================
- *   IoT SENSOR MONITORING SYSTEM -- ESP32 + DHT11
- *   FIXED: CORS headers day du cho tat ca routes
- * ============================================================
- */
-
 #include <WiFi.h>
 #include <WebServer.h>
 #include <Wire.h>
@@ -70,10 +63,7 @@ void handleOptions() {
   sendCORS();
   server.send(204);
 }
-
-// ============================================================
 //   OLED
-// ============================================================
 void oledSafe(float t, float h) {
   oled.clearDisplay();
   oled.setTextColor(SSD1306_WHITE);
@@ -118,10 +108,7 @@ void oledDanger(float t, float h) {
   oled.setCursor(0, 50); oled.println("VUOT NGUONG AN TOAN!");
   oled.display();
 }
-
-// ============================================================
 //   BUZZER
-// ============================================================
 void buzzAlert(String level) {
   if (silenced) return;
   unsigned long now = millis();
@@ -137,10 +124,7 @@ void buzzOff() {
   buzzState = false;
   digitalWrite(PIN_BUZZER, LOW);
 }
-
-// ============================================================
 //   BUILD JSON
-// ============================================================
 String buildStatus() {
   unsigned long up = millis() - uptimeStart;
   String j = "{";
@@ -168,10 +152,7 @@ String buildStatus() {
   j += "]}";
   return j;
 }
-
-// ============================================================
 //   WIFI
-// ============================================================
 void connectWiFi() {
   Serial.print("Connecting WiFi: "); Serial.println(WIFI_SSID);
   oled.clearDisplay();
@@ -197,10 +178,7 @@ void connectWiFi() {
   oled.display();
   delay(1500);
 }
-
-// ============================================================
 //   SETUP
-// ============================================================
 void setup() {
   Serial.begin(115200);
   pinMode(PIN_LED,    OUTPUT);
@@ -278,10 +256,7 @@ void setup() {
   Serial.print(WiFi.localIP());
   Serial.println("/status");
 }
-
-// ============================================================
 //   LOOP
-// ============================================================
 void loop() {
   server.handleClient();
 
