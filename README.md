@@ -193,6 +193,8 @@ OLED   GND   →  GND
 |:---:|
 | ![Demo](https://github.com/khanhly-dn/Iot-Fire-Alert-System/blob/main/DEMO.jpg?raw=true) |
 
+🎬 **Video hoạt động:** *  *
+
 ---
 
 ## 🚀 Hướng phát triển
