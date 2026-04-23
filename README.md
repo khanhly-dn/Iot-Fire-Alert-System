@@ -217,5 +217,5 @@ Khoa Công nghệ Thông tin – Trường Đại học Đại Nam
 ---
 
 <p align="center">
-  Made with ❤️ using ESP32 · DHT11 · OLED · Arduino
+  Made with using ESP32 · DHT11 · OLED · Arduino
 </p>
