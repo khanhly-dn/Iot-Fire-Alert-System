@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>IoT Sensor Monitor</title>
+<link rel="stylesheet" href="style1.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+  .ip-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #111827;
+    border: 1px solid #1e2d40;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+  }
+  .ip-bar label {
+    font-size: .85rem;
+    color: #5577aa;
+    white-space: nowrap;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+  }
+  .ip-bar input {
+    flex: 1;
+    background: #0a0e1a;
+    border: 1px solid #2a3d55;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #e0e6f0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: .95rem;
+    outline: none;
+  }
+  .ip-bar input:focus {
+    border-color: #00b4d8;
+  }
+  .ip-bar button {
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: .95rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .ip-bar button:active { transform: scale(.97); }
+  #conn-status {
+    font-size: .78rem;
+    font-family: 'Share Tech Mono', monospace;
+    white-space: nowrap;
+    color: #556677;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">&#127777;</div>
+    <div class="header-info">
+      <h1>IoT Sensor Monitor</h1>
+      <p id="ipinfo">ESP32 &middot; DHT11 &middot; Realtime Dashboard</p>
+    </div>
+    <div class="dot" id="dot"></div>
+  </header>
+
+  <!-- O NHAP IP -->
+  <div class="ip-bar">
+    <label>&#128279; ESP32 IP:</label>
+    <input type="text" id="ip-input" placeholder="192.168.x.x" />
+    <span id="conn-status">Chua ket noi</span>
+    <button onclick="doConnect()">&#9654; Ket Noi</button>
+  </div>
+
+  <!-- BANNER TRANG THAI -->
+  <div id="banner" class="safe">
+    <div class="bi" id="bi">&#9989;</div>
+    <div>
+      <div class="bt" id="bt">AN TOAN</div>
+      <div class="bs" id="bs">Nhiet do va do am trong nguong an toan</div>
+    </div>
+  </div>
+
+  <!-- GAUGES -->
+  <div class="gauges">
+    <div class="gauge-card">
+      <div class="gauge-lbl">&#9632; Nhiet do</div>
+      <div class="gauge-val" id="temp" style="color:#ff6b6b">--</div>
+      <div class="gauge-unit">do Celsius &nbsp;|&nbsp; Nguong: 35°C</div>
+      <div class="gauge-bar"><div class="gauge-fill" id="tf" style="background:#ff6b6b"></div></div>
+    </div>
+    <div class="gauge-card">
+      <div class="gauge-lbl">&#9632; Do am</div>
+      <div class="gauge-val" id="humi" style="color:#48cae4">--</div>
+      <div class="gauge-unit">Phan tram % &nbsp;|&nbsp; Nguong: 80%</div>
+      <div class="gauge-bar"><div class="gauge-fill" id="hf" style="background:#48cae4"></div></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="sv" id="up">0m 0s</div><div class="sl">Uptime</div></div>
+    <div class="stat"><div class="sv" id="mx">--</div><div class="sl">Max Temp</div></div>
+    <div class="stat"><div class="sv" id="mn">--</div><div class="sl">Min Temp</div></div>
+    <div class="stat"><div class="sv" id="rs">--</div><div class="sl">WiFi RSSI</div></div>
+  </div>
+
+  <!-- INDICATORS -->
+  <div class="indicators">
+    <div class="ind-card">
+      <div class="ind-dot off" id="led-dot"></div>
+      <div>
+        <div class="ind-name">LED Do</div>
+        <div class="ind-state" id="led-state">TAT</div>
+      </div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-dot off" id="buz-dot"></div>
+      <div>
+        <div class="ind-name">Buzzer</div>
+        <div class="ind-state" id="buz-state">TAT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btns">
+    <button class="btn b1" onclick="doTest()">&#9889; Test Alert</button>
+    <button class="btn b2" onclick="doSilence()">&#128277; Im Lang</button>
+    <button class="btn b3" onclick="doReset()">&#128260; Reset</button>
+  </div>
+
+  <!-- LOG -->
+  <div class="log-card">
+    <div class="lbl">&#9632; Nhat ky su kien</div>
+    <div id="log-body"><div class="no-log">Chua co su kien...</div></div>
+  </div>
+
+  <footer>ESP32 IOT MONITOR &middot; DHT11 &middot; OLED + WEB DASHBOARD &middot; v1.0</footer>
+</div>
+
+<div id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>

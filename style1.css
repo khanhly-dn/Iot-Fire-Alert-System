@@ -1,0 +1,375 @@
+/* ============================================================
+   IoT Sensor Monitor - style.css
+   ============================================================ */
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;
+  --bg2:#0d1117;
+  --card:#111827;
+  --border:#1e2a3a;
+  --text:#c9d6e3;
+  --muted:#4a6080;
+  --safe:#00e676;
+  --warn:#ffd600;
+  --danger:#ff1744;
+  --blue:#00b4d8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,216,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ---- HEADER ---- */
+header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(0,180,216,.3);
+}
+
+.header-info h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header-info p {
+  font-size: .75rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  margin-top: 2px;
+}
+
+.dot {
+  width: 10px; height: 10px;
+  background: var(--safe);
+  border-radius: 50%;
+  margin-left: auto;
+  box-shadow: 0 0 8px var(--safe);
+  flex-shrink: 0;
+  animation: pd 2s ease-in-out infinite;
+}
+
+@keyframes pd {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+
+/* ---- BANNER ---- */
+#banner {
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  transition: all .4s;
+  position: relative;
+  overflow: hidden;
+}
+
+#banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: .06;
+  pointer-events: none;
+}
+
+#banner.safe    { color: var(--safe);   border-color: rgba(0,230,118,.25); }
+#banner.warning { color: var(--warn);   border-color: rgba(255,214,0,.25); }
+#banner.danger  {
+  color: var(--danger);
+  border-color: rgba(255,23,68,.3);
+  animation: df .6s ease-in-out infinite alternate;
+}
+
+@keyframes df {
+  from { background: rgba(255,23,68,.04); }
+  to   { background: rgba(255,23,68,.10); }
+}
+
+.bi { font-size: 2.4rem; line-height: 1; }
+.bt { font-size: 1.5rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: currentColor; }
+.bs { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+/* ---- GAUGES ---- */
+.gauges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 500px) {
+  .gauges { grid-template-columns: 1fr; }
+}
+
+.gauge-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+}
+
+.gauge-lbl {
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  margin-bottom: 12px;
+}
+
+.gauge-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: color .4s;
+}
+
+.gauge-unit {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.gauge-bar {
+  width: 100%; height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  margin-top: 14px;
+  overflow: hidden;
+}
+
+.gauge-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0;
+  transition: width .6s, background .4s;
+}
+
+/* ---- STATS ---- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 560px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.sv {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.05rem;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.sl {
+  font-size: .64rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ---- INDICATORS ---- */
+.indicators {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ind-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ind-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all .3s;
+}
+
+.ind-dot.on-safe   { background: var(--safe);   box-shadow: 0 0 10px var(--safe); }
+.ind-dot.on-danger {
+  background: var(--danger);
+  box-shadow: 0 0 10px var(--danger);
+  animation: blink .5s ease-in-out infinite alternate;
+}
+.ind-dot.off { background: var(--border); }
+
+@keyframes blink {
+  from { opacity: 1; }
+  to   { opacity: .3; }
+}
+
+.ind-name  { font-size: .95rem; font-weight: 700; letter-spacing: 1px; }
+.ind-state { font-size: .72rem; font-family: 'Share Tech Mono', monospace; margin-top: 3px; color: var(--muted); }
+
+/* ---- BUTTONS ---- */
+.btns {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1; min-width: 90px;
+  padding: 11px 0;
+  border: none; border-radius: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: .9rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .15s, filter .15s;
+}
+
+.btn:hover  { transform: translateY(-2px); filter: brightness(1.15); }
+.btn:active { transform: translateY(0); }
+
+.b1 { background: linear-gradient(135deg,#ff6b35,#ff1744); color:#fff; box-shadow:0 4px 14px rgba(255,23,68,.25); }
+.b2 { background: linear-gradient(135deg,#f59e0b,#d97706); color:#fff; box-shadow:0 4px 14px rgba(245,158,11,.2); }
+.b3 { background: linear-gradient(135deg,#0ea5e9,#0284c7); color:#fff; box-shadow:0 4px 14px rgba(14,165,233,.2); }
+
+/* ---- LOG ---- */
+.log-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.lbl {
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+#log-body { max-height: 200px; overflow-y: auto; }
+#log-body::-webkit-scrollbar       { width: 4px; }
+#log-body::-webkit-scrollbar-track { background: var(--border); }
+#log-body::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
+
+.lr {
+  display: grid;
+  grid-template-columns: 60px 80px 70px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .72rem;
+  margin-bottom: 3px;
+}
+
+.lr:hover { background: rgba(255,255,255,.03); }
+.lts { color: var(--muted); }
+.lt  { color: #ff6b6b; }
+.lh  { color: #48cae4; }
+.llv { font-weight: 700; text-align: right; }
+.lr.SAFE    .llv { color: var(--safe); }
+.lr.WARNING .llv { color: var(--warn); }
+.lr.DANGER  .llv { color: var(--danger); }
+
+.no-log {
+  color: var(--muted);
+  font-size: .8rem;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 8px;
+}
+
+/* ---- TOAST ---- */
+#toast {
+  position: fixed;
+  bottom: 22px; right: 22px;
+  background: var(--card);
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .83rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .3s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+#toast.show { opacity: 1; transform: translateY(0); }
+
+/* ---- FOOTER ---- */
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: .68rem;
+  font-family: 'Share Tech Mono', monospace;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  letter-spacing: 1px;
+}
